@@ -1,0 +1,138 @@
+body {
+    background-color: rgb(42,42,41);
+    color: white;
+    background-image: url(bg.jpg);
+    background-size: cover;
+}
+#title{
+    text-align: center;
+    color: rgb(211, 202, 190);
+    font-size: 50px;
+    -webkit-text-stroke: 1px black;
+}
+.profileimage{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid rgb(255, 140, 0);
+    display: block;
+}
+.btn{
+    display: block;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    background-color: rgb(255, 140, 0);
+    margin: 10px auto;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.d{
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+    background-color: rgb(42,42,41);
+    display: inline-block;
+    border: 5px solid rgb(211, 202, 190);
+    border-radius: 10px;
+    height: 300px;
+}
+.container{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+.management-page {
+    background-color: rgb(42,42,41);
+    color: white;
+    background-image: url(bg.jpg);
+    background-size: cover;
+    min-height: 100vh;
+}
+.management-page .page-title {
+    text-align: center;
+    color: rgb(211, 202, 190);
+    font-size: 45px;
+    -webkit-text-stroke: 1px black;
+    margin-top: 20px;
+}
+.management-page .page-container {
+    width: 80%;
+    margin: 30px auto;
+}
+.management-page .form-card {
+    background-color: rgb(42,42,41);
+    border: 5px solid rgb(211, 202, 190);
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+.management-page .form-card h2 {
+    color: rgb(211, 202, 190);
+    text-align: center;
+}
+.management-page label {
+    display: block;
+    margin-top: 15px;
+    font-size: 18px;
+}
+.management-page input,
+.management-page select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 2px solid rgb(211, 202, 190);
+    font-size: 16px;
+}
+.management-page .action-btn {
+    display: block;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    background-color: rgb(255, 140, 0);
+    margin: 20px auto 0;
+    border-radius: 5px;
+    padding: 8px 18px;
+    border: 2px solid rgb(211, 202, 190);
+}
+.management-page .table-card {
+    background-color: rgb(42,42,41);
+    border: 5px solid rgb(211, 202, 190);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+}
+.management-page .table-card h2 {
+    text-align: center;
+    color: rgb(211, 202, 190);
+}
+.management-page table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+.management-page th,
+.management-page td {
+    border: 2px solid rgb(211, 202, 190);
+    padding: 10px;
+    text-align: center;
+}
+.management-page th {
+    background-color: rgb(255, 140, 0);
+    color: white;
+}
+.management-page .back-btn {
+    display: block;
+    width: fit-content;
+    margin: 20px auto;
+    padding: 8px 18px;
+    background-color: rgb(255, 140, 0);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 2px solid rgb(211, 202, 190);
+}

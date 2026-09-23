@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="management-page">
+
+    <h1 class="page-title">Author Management</h1>
+
+    <div class="page-container">
+
+        <div class="form-card">
+
+            <h2>Add Author</h2>
+
+            <label for="authorName">Author Name</label>
+            <input type="text" id="authorName" placeholder="Enter author name">
+
+            <label for="authorEmail">Email</label>
+            <input type="email" id="authorEmail" placeholder="Enter email">
+
+            <button class="action-btn">Add Author</button>
+
+        </div>
+
+        <div class="table-card">
+
+            <h2>Author Records</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Author ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <!-- MySQL data will appear here later -->
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+    <button class="back-btn" onclick="window.location.href='index.html'">
+        Back to Home
+    </button>
+
+</body>
+</html>

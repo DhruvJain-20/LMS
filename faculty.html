@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="management-page">
+
+    <h1 class="page-title">Faculty Management</h1>
+
+    <div class="page-container">
+
+        <div class="form-card">
+
+            <h2>Add Faculty</h2>
+
+            <label for="facultyName">Faculty Name</label>
+            <input type="text" id="facultyName" placeholder="Enter faculty name">
+
+            <label for="facultyEmail">Email</label>
+            <input type="email" id="facultyEmail" placeholder="Enter email">
+
+            <label for="facultyDepartment">Department</label>
+            <input type="text" id="facultyDepartment" placeholder="Enter department">
+
+            <button class="action-btn">Add Faculty</button>
+
+        </div>
+
+
+        <div class="table-card">
+
+            <h2>Faculty Records</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Faculty ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <!-- MySQL data will appear here later -->
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+    <button class="back-btn" onclick="window.location.href='index.html'">
+        Back to Home
+    </button>
+
+</body>
+</html>

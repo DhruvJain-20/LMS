@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="management-page">
+
+    <h1 class="page-title">Transaction Management</h1>
+
+    <div class="page-container">
+
+        <div class="form-card">
+
+            <h2>Issue / Return Book</h2>
+
+            <label for="book">Book</label>
+            <select id="book">
+                <option value="">Select Book</option>
+                <option>Book 1</option>
+                <option>Book 2</option>
+            </select>
+
+            <label for="borrowerType">Borrower Type</label>
+            <select id="borrowerType">
+                <option value="">Select Borrower</option>
+                <option>Student</option>
+                <option>Faculty</option>
+            </select>
+
+            <label for="student">Student</label>
+            <select id="student">
+                <option value="">Select Student</option>
+                <option>Student 1</option>
+                <option>Student 2</option>
+            </select>
+
+            <label for="faculty">Faculty</label>
+            <select id="faculty">
+                <option value="">Select Faculty</option>
+                <option>Faculty 1</option>
+                <option>Faculty 2</option>
+            </select>
+
+            <label for="issueDate">Issue Date</label>
+            <input type="date" id="issueDate">
+
+            <label for="dueDate">Due Date</label>
+            <input type="date" id="dueDate">
+
+            <label for="returnDate">Return Date</label>
+            <input type="date" id="returnDate">
+
+            <label for="fine">Fine</label>
+            <input type="number" id="fine" placeholder="Enter fine">
+
+            <button class="action-btn">Issue Book</button>
+
+            <button class="return-btn">Return Book</button>
+
+        </div>
+
+
+        <div class="table-card">
+
+            <h2>Transaction Records</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Issue ID</th>
+                        <th>Book</th>
+                        <th>Student</th>
+                        <th>Faculty</th>
+                        <th>Issue Date</th>
+                        <th>Due Date</th>
+                        <th>Return Date</th>
+                        <th>Fine</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <!-- MySQL data will appear here later -->
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+    <button class="back-btn" onclick="window.location.href='index.html'">
+        Back to Home
+    </button>
+
+</body>
+</html>
