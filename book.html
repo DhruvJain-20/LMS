@@ -20,15 +20,6 @@
             <label for="bookTitle">Book Title</label>
             <input type="text" id="bookTitle" placeholder="Enter book title">
 
-            <label for="isbn">ISBN</label>
-            <input type="text" id="isbn" placeholder="Enter ISBN">
-
-            <label for="edition">Edition</label>
-            <input type="text" id="edition" placeholder="Enter edition">
-
-            <label for="year">Publication Year</label>
-            <input type="number" id="year" placeholder="Enter year">
-
             <label for="author">Author</label>
             <select id="author">
                 <option value="">Select Author</option>
@@ -43,7 +34,7 @@
                 <option>Publisher 2</option>
             </select>
 
-            <button class="action-btn">Add Book</button>
+            <button class="action-btn" id="addBookBtn">Add Book</button>
 
         </div>
 
@@ -55,18 +46,14 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Book ID</th>
-                        <th>Title</th>
-                        <th>ISBN</th>
-                        <th>Edition</th>
-                        <th>Year</th>
-                        <th>Author</th>
-                        <th>Publisher</th>
-                    </tr>
+    <th>Book ID</th>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Publisher</th>
+</tr>
                 </thead>
 
-                <tbody>
-                    <!-- MySQL data will appear here later -->
+                <tbody id="bookTableBody">
                 </tbody>
             </table>
 
@@ -77,6 +64,6 @@
     <button class="back-btn" onclick="window.location.href='index.html'">
         Back to Home
     </button>
-
+    <script src="book.js"></script>
 </body>
 </html>

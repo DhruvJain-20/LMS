@@ -26,7 +26,7 @@
             <label for="facultyDepartment">Department</label>
             <input type="text" id="facultyDepartment" placeholder="Enter department">
 
-            <button class="action-btn">Add Faculty</button>
+           <button class="action-btn" id="addFacultyBtn">Add Faculty</button>
 
         </div>
 
@@ -45,9 +45,8 @@
                     </tr>
                 </thead>
 
-                <tbody>
-                    <!-- MySQL data will appear here later -->
-                </tbody>
+                <tbody id="facultyTableBody">
+</tbody>
             </table>
 
         </div>
@@ -57,6 +56,6 @@
     <button class="back-btn" onclick="window.location.href='index.html'">
         Back to Home
     </button>
-
+<script src="faculty.js"></script>
 </body>
 </html>

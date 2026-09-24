@@ -19,10 +19,8 @@
 
             <label for="book">Book</label>
             <select id="book">
-                <option value="">Select Book</option>
-                <option>Book 1</option>
-                <option>Book 2</option>
-            </select>
+    <option value="">Select Book</option>
+</select>
 
             <label for="borrowerType">Borrower Type</label>
             <select id="borrowerType">
@@ -33,17 +31,13 @@
 
             <label for="student">Student</label>
             <select id="student">
-                <option value="">Select Student</option>
-                <option>Student 1</option>
-                <option>Student 2</option>
-            </select>
+    <option value="">Select Student</option>
+</select>
 
             <label for="faculty">Faculty</label>
             <select id="faculty">
-                <option value="">Select Faculty</option>
-                <option>Faculty 1</option>
-                <option>Faculty 2</option>
-            </select>
+    <option value="">Select Faculty</option>
+</select>
 
             <label for="issueDate">Issue Date</label>
             <input type="date" id="issueDate">
@@ -51,15 +45,10 @@
             <label for="dueDate">Due Date</label>
             <input type="date" id="dueDate">
 
-            <label for="returnDate">Return Date</label>
-            <input type="date" id="returnDate">
-
             <label for="fine">Fine</label>
             <input type="number" id="fine" placeholder="Enter fine">
 
-            <button class="action-btn">Issue Book</button>
-
-            <button class="return-btn">Return Book</button>
+            <button class="action-btn" id="issueBookBtn">Issue Book</button>
 
         </div>
 
@@ -77,14 +66,12 @@
                         <th>Faculty</th>
                         <th>Issue Date</th>
                         <th>Due Date</th>
-                        <th>Return Date</th>
                         <th>Fine</th>
                     </tr>
                 </thead>
 
-                <tbody>
-                    <!-- MySQL data will appear here later -->
-                </tbody>
+                <tbody id="transactionTableBody">
+</tbody>
             </table>
 
         </div>
@@ -94,6 +81,6 @@
     <button class="back-btn" onclick="window.location.href='index.html'">
         Back to Home
     </button>
-
+<script src="transaction.js"></script>
 </body>
 </html>
