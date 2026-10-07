@@ -136,3 +136,21 @@ body {
     border-radius: 5px;
     border: 2px solid rgb(211, 202, 190);
 }
+.edit-btn,
+.delete-btn {
+    padding: 6px 12px;
+    margin: 2px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background: #d6a85f;
+    color: black;
+}
+
+.delete-btn {
+    background: #c94c4c;
+    color: white;
+}

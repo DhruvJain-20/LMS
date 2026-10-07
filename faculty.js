@@ -1,5 +1,7 @@
 const API_URL = "http://localhost:3000/api/faculty";
 
+let editingFacultyId = null;
+
 
 // Load faculty when page opens
 window.onload = function () {
@@ -28,6 +30,22 @@ function loadFaculty() {
                     <td>${member.Name}</td>
                     <td>${member.Email}</td>
                     <td>${member.Department}</td>
+                    <td>
+                        <button class="edit-btn"
+                            onclick="editFaculty(
+                                ${member.FacultyID},
+                                '${member.Name}',
+                                '${member.Email}',
+                                '${member.Department}'
+                            )">
+                            Edit
+                        </button>
+
+                        <button class="delete-btn"
+                            onclick="deleteFaculty(${member.FacultyID})">
+                            Delete
+                        </button>
+                    </td>
                 `;
 
                 tableBody.appendChild(row);
@@ -41,18 +59,18 @@ function loadFaculty() {
 }
 
 
-// Add Faculty
+// Add / Update Faculty
 document.getElementById("addFacultyBtn")
     .addEventListener("click", function () {
 
         const name =
-            document.getElementById("facultyName").value;
+            document.getElementById("facultyName").value.trim();
 
         const email =
-            document.getElementById("facultyEmail").value;
+            document.getElementById("facultyEmail").value.trim();
 
         const department =
-            document.getElementById("facultyDepartment").value;
+            document.getElementById("facultyDepartment").value.trim();
 
 
         if (name === "" ||
@@ -64,6 +82,50 @@ document.getElementById("addFacultyBtn")
         }
 
 
+        // UPDATE
+        if (editingFacultyId !== null) {
+
+            fetch(`${API_URL}/${editingFacultyId}`, {
+
+                method: "PUT",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    Name: name,
+                    Email: email,
+                    Department: department
+                })
+
+            })
+            .then(response => response.json())
+            .then(data => {
+
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+                alert("Faculty updated successfully!");
+
+                resetForm();
+                loadFaculty();
+
+            })
+            .catch(error => {
+
+                console.error("Error updating faculty:", error);
+                alert("Failed to update faculty.");
+
+            });
+
+            return;
+        }
+
+
+        // ADD
         fetch(API_URL, {
 
             method: "POST",
@@ -91,10 +153,7 @@ document.getElementById("addFacultyBtn")
 
             alert("Faculty added successfully!");
 
-            document.getElementById("facultyName").value = "";
-            document.getElementById("facultyEmail").value = "";
-            document.getElementById("facultyDepartment").value = "";
-
+            resetForm();
             loadFaculty();
 
         })
@@ -108,3 +167,69 @@ document.getElementById("addFacultyBtn")
         });
 
     });
+
+
+// Edit Faculty
+function editFaculty(id, name, email, department) {
+
+    editingFacultyId = id;
+
+    document.getElementById("facultyName").value = name;
+    document.getElementById("facultyEmail").value = email;
+    document.getElementById("facultyDepartment").value = department;
+
+    document.getElementById("addFacultyBtn").textContent =
+        "Update Faculty";
+}
+
+
+// Delete Faculty
+function deleteFaculty(id) {
+
+    const confirmDelete = confirm(
+        "Are you sure you want to delete this faculty member?"
+    );
+
+    if (!confirmDelete) {
+        return;
+    }
+
+    fetch(`${API_URL}/${id}`, {
+
+        method: "DELETE"
+
+    })
+    .then(response => response.json())
+    .then(data => {
+
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+
+        alert("Faculty deleted successfully!");
+
+        loadFaculty();
+
+    })
+    .catch(error => {
+
+        console.error("Error deleting faculty:", error);
+        alert("Failed to delete faculty.");
+
+    });
+}
+
+
+// Reset form
+function resetForm() {
+
+    editingFacultyId = null;
+
+    document.getElementById("facultyName").value = "";
+    document.getElementById("facultyEmail").value = "";
+    document.getElementById("facultyDepartment").value = "";
+
+    document.getElementById("addFacultyBtn").textContent =
+        "Add Faculty";
+}

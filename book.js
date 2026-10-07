@@ -1,5 +1,7 @@
 const API_URL = "http://localhost:3000/api";
 
+let editingBookId = null;
+
 
 // Run when page opens
 window.onload = function () {
@@ -18,7 +20,6 @@ function loadAuthors() {
 
             const authorSelect = document.getElementById("author");
 
-            // Keep first option
             authorSelect.innerHTML =
                 '<option value="">Select Author</option>';
 
@@ -50,7 +51,6 @@ function loadPublishers() {
             const publisherSelect =
                 document.getElementById("publisher");
 
-            // Keep first option
             publisherSelect.innerHTML =
                 '<option value="">Select Publisher</option>';
 
@@ -93,6 +93,17 @@ function loadBooks() {
                     <td>${book.Title}</td>
                     <td>${book.AuthorName}</td>
                     <td>${book.PublisherName}</td>
+                    <td>
+                        <button class="edit-btn"
+                            onclick="editBook(${book.BookID}, '${book.Title}', ${book.AuthorID}, ${book.PublisherID})">
+                            Edit
+                        </button>
+
+                        <button class="delete-btn"
+                            onclick="deleteBook(${book.BookID})">
+                            Delete
+                        </button>
+                    </td>
                 `;
 
                 tableBody.appendChild(row);
@@ -106,12 +117,12 @@ function loadBooks() {
 }
 
 
-// Add Book
+// Add / Update Book
 document.getElementById("addBookBtn")
     .addEventListener("click", function () {
 
         const title =
-            document.getElementById("bookTitle").value;
+            document.getElementById("bookTitle").value.trim();
 
         const authorID =
             document.getElementById("author").value;
@@ -129,6 +140,50 @@ document.getElementById("addBookBtn")
         }
 
 
+        // UPDATE BOOK
+        if (editingBookId !== null) {
+
+            fetch(`${API_URL}/books/${editingBookId}`, {
+
+                method: "PUT",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    Title: title,
+                    AuthorID: authorID,
+                    PublisherID: publisherID
+                })
+
+            })
+            .then(response => response.json())
+            .then(data => {
+
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+                alert("Book updated successfully!");
+
+                resetForm();
+                loadBooks();
+
+            })
+            .catch(error => {
+
+                console.error("Error updating book:", error);
+                alert("Failed to update book.");
+
+            });
+
+            return;
+        }
+
+
+        // ADD BOOK
         fetch(`${API_URL}/books`, {
 
             method: "POST",
@@ -156,10 +211,7 @@ document.getElementById("addBookBtn")
 
             alert("Book added successfully!");
 
-            document.getElementById("bookTitle").value = "";
-            document.getElementById("author").value = "";
-            document.getElementById("publisher").value = "";
-
+            resetForm();
             loadBooks();
 
         })
@@ -173,3 +225,67 @@ document.getElementById("addBookBtn")
         });
 
     });
+
+
+// Edit Book
+function editBook(id, title, authorID, publisherID) {
+
+    editingBookId = id;
+
+    document.getElementById("bookTitle").value = title;
+    document.getElementById("author").value = authorID;
+    document.getElementById("publisher").value = publisherID;
+
+    document.getElementById("addBookBtn").textContent = "Update Book";
+}
+
+
+// Delete Book
+function deleteBook(id) {
+
+    const confirmDelete = confirm(
+        "Are you sure you want to delete this book?"
+    );
+
+    if (!confirmDelete) {
+        return;
+    }
+
+    fetch(`${API_URL}/books/${id}`, {
+
+        method: "DELETE"
+
+    })
+    .then(response => response.json())
+    .then(data => {
+
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+
+        alert("Book deleted successfully!");
+
+        loadBooks();
+
+    })
+    .catch(error => {
+
+        console.error("Error deleting book:", error);
+        alert("Failed to delete book.");
+
+    });
+}
+
+
+// Reset form
+function resetForm() {
+
+    editingBookId = null;
+
+    document.getElementById("bookTitle").value = "";
+    document.getElementById("author").value = "";
+    document.getElementById("publisher").value = "";
+
+    document.getElementById("addBookBtn").textContent = "Add Book";
+}

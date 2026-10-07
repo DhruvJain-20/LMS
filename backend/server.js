@@ -126,8 +126,7 @@ app.get("/api/books", (req, res) => {
         JOIN Author
             ON Book.AuthorID = Author.AuthorID
         JOIN Publisher
-            ON Book.PublisherID = Publisher.PublisherID
-    `;
+            ON Book.PublisherID = Publisher.PublisherID`;
 
     db.query(sql, (err, results) => {
 
@@ -325,6 +324,9 @@ app.get("/api/transactions", (req, res) => {
     const sql = `
         SELECT
             IT.IssueID,
+            IT.BookID,
+            IT.StudentID,
+            IT.FacultyID,
             B.Title AS BookTitle,
             S.Name AS StudentName,
             F.Name AS FacultyName,
@@ -345,23 +347,17 @@ app.get("/api/transactions", (req, res) => {
         ORDER BY IT.IssueID;
     `;
 
-
     db.query(sql, (err, results) => {
 
         if (err) {
-
-            console.log(err);
-
             return res.status(500).json({
                 error: "Failed to fetch transactions"
             });
-
         }
 
         res.json(results);
 
     });
-
 });
 
 app.post("/api/transactions", (req, res) => {
@@ -447,6 +443,480 @@ app.post("/api/transactions", (req, res) => {
 
         }
     );
+
+});
+
+// Update author
+app.put("/api/authors/:id", (req, res) => {
+
+    const { Name, Email } = req.body;
+    const authorId = req.params.id;
+
+    const sql = `
+        UPDATE Author
+        SET Name = ?, Email = ?
+        WHERE AuthorID = ?
+    `;
+
+    db.query(sql, [Name, Email, authorId], (err, result) => {
+
+        if (err) {
+            return res.status(500).json({
+                error: err.message
+            });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                error: "Author not found"
+            });
+        }
+
+        res.json({
+            message: "Author updated successfully"
+        });
+
+    });
+});
+
+
+// Delete author
+app.delete("/api/authors/:id", (req, res) => {
+
+    const authorId = req.params.id;
+
+    const sql = `
+        DELETE FROM Author
+        WHERE AuthorID = ?
+    `;
+
+    db.query(sql, [authorId], (err, result) => {
+
+        if (err) {
+            return res.status(500).json({
+                error: err.message
+            });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                error: "Author not found"
+            });
+        }
+
+        res.json({
+            message: "Author deleted successfully"
+        });
+
+    });
+});
+
+// Update publisher
+app.put("/api/publishers/:id", (req, res) => {
+
+    const { Name, Email } = req.body;
+    const publisherId = req.params.id;
+
+    const sql = `
+        UPDATE Publisher
+        SET Name = ?, Email = ?
+        WHERE PublisherID = ?
+    `;
+
+    db.query(sql, [Name, Email, publisherId], (err, result) => {
+
+        if (err) {
+            return res.status(500).json({
+                error: err.message
+            });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                error: "Publisher not found"
+            });
+        }
+
+        res.json({
+            message: "Publisher updated successfully"
+        });
+
+    });
+});
+
+
+// Delete publisher
+app.delete("/api/publishers/:id", (req, res) => {
+
+    const publisherId = req.params.id;
+
+    const sql = `
+        DELETE FROM Publisher
+        WHERE PublisherID = ?
+    `;
+
+    db.query(sql, [publisherId], (err, result) => {
+
+        if (err) {
+            return res.status(500).json({
+                error: err.message
+            });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                error: "Publisher not found"
+            });
+        }
+
+        res.json({
+            message: "Publisher deleted successfully"
+        });
+
+    });
+});
+
+// Update book
+app.put("/api/books/:id", (req, res) => {
+
+    const { Title, AuthorID, PublisherID } = req.body;
+    const bookId = req.params.id;
+
+    const sql = `
+        UPDATE Book
+        SET Title = ?, AuthorID = ?, PublisherID = ?
+        WHERE BookID = ?
+    `;
+
+    db.query(
+        sql,
+        [Title, AuthorID, PublisherID, bookId],
+        (err, result) => {
+
+            if (err) {
+                return res.status(500).json({
+                    error: err.message
+                });
+            }
+
+            if (result.affectedRows === 0) {
+                return res.status(404).json({
+                    error: "Book not found"
+                });
+            }
+
+            res.json({
+                message: "Book updated successfully"
+            });
+
+        }
+    );
+});
+
+
+// Delete book
+app.delete("/api/books/:id", (req, res) => {
+
+    const bookId = req.params.id;
+
+    const sql = `
+        DELETE FROM Book
+        WHERE BookID = ?
+    `;
+
+    db.query(sql, [bookId], (err, result) => {
+
+        if (err) {
+            return res.status(500).json({
+                error: err.message
+            });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                error: "Book not found"
+            });
+        }
+
+        res.json({
+            message: "Book deleted successfully"
+        });
+
+    });
+});
+
+// Update student
+app.put("/api/students/:id", (req, res) => {
+
+    const { Name, Email, Department, Yeat } = req.body;
+    const studentId = req.params.id;
+
+    const sql = `
+        UPDATE Student
+        SET Name = ?, Email = ?, Department = ?, Yeat = ?
+        WHERE StudentID = ?
+    `;
+
+    db.query(
+        sql,
+        [Name, Email, Department, Yeat, studentId],
+        (err, result) => {
+
+            if (err) {
+                return res.status(500).json({
+                    error: err.message
+                });
+            }
+
+            if (result.affectedRows === 0) {
+                return res.status(404).json({
+                    error: "Student not found"
+                });
+            }
+
+            res.json({
+                message: "Student updated successfully"
+            });
+
+        }
+    );
+});
+
+
+// Delete student
+app.delete("/api/students/:id", (req, res) => {
+
+    const studentId = req.params.id;
+
+    const sql = `
+        DELETE FROM Student
+        WHERE StudentID = ?
+    `;
+
+    db.query(sql, [studentId], (err, result) => {
+
+        if (err) {
+            return res.status(500).json({
+                error: err.message
+            });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                error: "Student not found"
+            });
+        }
+
+        res.json({
+            message: "Student deleted successfully"
+        });
+
+    });
+});
+
+// Update faculty
+app.put("/api/faculty/:id", (req, res) => {
+
+    const { Name, Email, Department } = req.body;
+    const facultyId = req.params.id;
+
+    const sql = `
+        UPDATE Faculty
+        SET Name = ?, Email = ?, Department = ?
+        WHERE FacultyID = ?
+    `;
+
+    db.query(
+        sql,
+        [Name, Email, Department, facultyId],
+        (err, result) => {
+
+            if (err) {
+                return res.status(500).json({
+                    error: err.message
+                });
+            }
+
+            if (result.affectedRows === 0) {
+                return res.status(404).json({
+                    error: "Faculty not found"
+                });
+            }
+
+            res.json({
+                message: "Faculty updated successfully"
+            });
+
+        }
+    );
+});
+
+
+// Delete faculty
+app.delete("/api/faculty/:id", (req, res) => {
+
+    const facultyId = req.params.id;
+
+    const sql = `
+        DELETE FROM Faculty
+        WHERE FacultyID = ?
+    `;
+
+    db.query(sql, [facultyId], (err, result) => {
+
+        if (err) {
+            return res.status(500).json({
+                error: err.message
+            });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                error: "Faculty not found"
+            });
+        }
+
+        res.json({
+            message: "Faculty deleted successfully"
+        });
+
+    });
+});
+
+// Update transaction
+app.put("/api/transactions/:id", (req, res) => {
+
+    const {
+        BookID,
+        StudentID,
+        FacultyID,
+        IssueDate,
+        DueDate,
+        Fine
+    } = req.body;
+
+    const issueId = req.params.id;
+
+
+    if (!BookID || !IssueDate || !DueDate) {
+
+        return res.status(400).json({
+            error: "Book, Issue Date and Due Date are required"
+        });
+
+    }
+
+
+    if (!StudentID && !FacultyID) {
+
+        return res.status(400).json({
+            error: "Please select a student or faculty member"
+        });
+
+    }
+
+
+    if (StudentID && FacultyID) {
+
+        return res.status(400).json({
+            error: "Select either Student or Faculty, not both"
+        });
+
+    }
+
+
+    const sql = `
+        UPDATE Issue_Transaction
+
+        SET
+            BookID = ?,
+            StudentID = ?,
+            FacultyID = ?,
+            IssueDate = ?,
+            DueDate = ?,
+            Fine = ?
+
+        WHERE IssueID = ?
+    `;
+
+
+    db.query(
+        sql,
+        [
+            BookID,
+            StudentID || null,
+            FacultyID || null,
+            IssueDate,
+            DueDate,
+            Fine || 0,
+            issueId
+        ],
+        (err, result) => {
+
+            if (err) {
+
+                return res.status(500).json({
+                    error: err.message
+                });
+
+            }
+
+
+            if (result.affectedRows === 0) {
+
+                return res.status(404).json({
+                    error: "Transaction not found"
+                });
+
+            }
+
+
+            res.json({
+                message: "Transaction updated successfully"
+            });
+
+        }
+    );
+
+});
+
+
+// Delete transaction
+app.delete("/api/transactions/:id", (req, res) => {
+
+    const issueId = req.params.id;
+
+    const sql = `
+        DELETE FROM Issue_Transaction
+        WHERE IssueID = ?
+    `;
+
+
+    db.query(sql, [issueId], (err, result) => {
+
+        if (err) {
+
+            return res.status(500).json({
+                error: err.message
+            });
+
+        }
+
+
+        if (result.affectedRows === 0) {
+
+            return res.status(404).json({
+                error: "Transaction not found"
+            });
+
+        }
+
+
+        res.json({
+            message: "Transaction deleted successfully"
+        });
+
+    });
 
 });
 
