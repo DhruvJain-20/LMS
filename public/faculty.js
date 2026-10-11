@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000/api/faculty";
+const API_URL = "http://lms-backend-delta-green.vercel.app/api/faculty";
 
 let editingFacultyId = null;
 
