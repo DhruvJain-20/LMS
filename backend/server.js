@@ -920,6 +920,11 @@ app.delete("/api/transactions/:id", (req, res) => {
 
 });
 
+if (require.main === module) {
+    app.listen(process.env.PORT || 3000, () => {
+        console.log("Server running");
+    });
+}
 // app.listen(3000, () => {
 //     console.log("Server running at http://localhost:3000");
 // });
