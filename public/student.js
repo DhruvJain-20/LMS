@@ -1,4 +1,4 @@
-const API_URL = "http://lms-backend-delta-green.vercel.app/api/students";
+const API_URL = "https://lms-backend-delta-green.vercel.app/api/students";
 
 let editingStudentId = null;
 
